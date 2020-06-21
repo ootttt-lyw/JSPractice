@@ -1,0 +1,337 @@
+import React from 'react'
+
+export default class Test01 extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={
+            username:'11',
+            goodsSpecJSON: [{
+                "SpecA": "颜色"
+            }, {
+                "SpecB": "容量"
+            }, {
+                "SpecC": "大小"
+            }, {
+                "SpecD": "尺寸"
+            }, {
+                "SpecE": "套餐"
+            }],
+            goodsSpecList: [{
+                c_id: 3133,
+                costPrice: 0,
+                discountPrice: 0,
+                earn: 0,
+                etime: null,
+                flag: 0,
+                goodsDetailCount: 199,
+                goodsDetailId: "100PgQ2xy08121409mY27",
+                goodsDetailInventory: 199,
+                goodsDetailOff: 0,
+                goodsDetailPic: "/upload/messageImage/1523281057461_Personal.jpg,/upload/messageImage/1523282906972_Personal.jpg,/upload/messageImage/1523283570897_Personal.jpg",
+                goodsDetailPrice: 188,
+                goodsDetailSpec: "",
+                goodsId: "00Y1kR4r1029X822731o0",
+                isHost: 0,
+                managerEarn: 0,
+                postage: 10,
+                profit: 0,
+                specA: "红色",
+                specB: "32G",
+                specC: "小",
+                specD: "4.7寸",
+                specE: "套餐一",
+                unionEarn: 0,
+                vipPrice: 0
+                }, {
+                c_id: 3134,
+                costPrice: 0,
+                discountPrice: 0,
+                earn: 0,
+                etime: null,
+                flag: 0,
+                goodsDetailCount: 199,
+                goodsDetailId: "100PgQ2xy08121409mY27",
+                goodsDetailInventory: 199,
+                goodsDetailOff: 0,
+                goodsDetailPic: "/upload/messageImage/1523281057461_Personal.jpg,/upload/messageImage/1523282906972_Personal.jpg,/upload/messageImage/1523283570897_Personal.jpg",
+                goodsDetailPrice: 188,
+                goodsDetailSpec: "",
+                goodsId: "00Y1kR4r1029X822731o0",
+                isHost: 0,
+                managerEarn: 0,
+                postage: 10,
+                profit: 0,
+                specA: "白色",
+                specB: "64G",
+                specC: "小",
+                specD: "5寸",
+                specE: "套餐二",
+                unionEarn: 0,
+                vipPrice: 0
+                }, {
+                c_id: 3135,
+                costPrice: 0,
+                discountPrice: 0,
+                earn: 0,
+                etime: null,
+                flag: 0,
+                goodsDetailCount: 199,
+                goodsDetailId: "100PgQ2xy08121409mY27",
+                goodsDetailInventory: 199,
+                goodsDetailOff: 0,
+                goodsDetailPic: "/upload/messageImage/1523281057461_Personal.jpg,/upload/messageImage/1523282906972_Personal.jpg,/upload/messageImage/1523283570897_Personal.jpg",
+                goodsDetailPrice: 188,
+                goodsDetailSpec: "",
+                goodsId: "00Y1kR4r1029X822731o0",
+                isHost: 0,
+                managerEarn: 0,
+                postage: 10,
+                profit: 0,
+                specA: "黑色",
+                specB: "128G",
+                specC: "小",
+                specD: "4.7寸",
+                specE: "套餐一",
+                unionEarn: 0,
+                vipPrice: 0
+                }, {
+                c_id: 3136,
+                costPrice: 0,
+                discountPrice: 0,
+                earn: 0,
+                etime: null,
+                flag: 0,
+                goodsDetailCount: 199,
+                goodsDetailId: "100PgQ2xy08121409mY27",
+                goodsDetailInventory: 199,
+                goodsDetailOff: 0,
+                goodsDetailPic: "/upload/messageImage/1523281057461_Personal.jpg,/upload/messageImage/1523282906972_Personal.jpg,/upload/messageImage/1523283570897_Personal.jpg",
+                goodsDetailPrice: 188,
+                goodsDetailSpec: "",
+                goodsId: "00Y1kR4r1029X822731o0",
+                isHost: 0,
+                managerEarn: 0,
+                postage: 10,
+                profit: 0,
+                specA: "蓝色",
+                specB: "64GG",
+                specC: "大",
+                specD: "4.5寸",
+                specE: "套餐二",
+                unionEarn: 0,
+                vipPrice: 0
+                }]
+
+        }
+    }
+
+
+    handleClick = ()=> {
+        /**
+         * 0，理清楚需求，到底要干嘛对吧，这个你总得先知道吧。
+         * 关联关系是，两个对象中元素的key可以转化成相同
+         * 从a对象中取值作为从b对象中的取值的键，把b对象中的值作为新值， 
+         * 用到的js方法有 
+         *  Object.keys(e) 返回对象的key作为数组的元素[A]
+         *  Object = Object.map((keyo)=> { //  map遍历后返回一个新的对象(可以改变当前循环的值，map需要return)  
+         *  })
+         *
+         * forEach遍历对象，在forEach中return是无效的（但是我们可以在外面定义一个对象，在循环遍历的时候赋值即可）
+         * 
+         * 1,先将首字母转小写
+         * 2，输出对象一（根据转小写的新对象，遍历key,根据key得到值a，然后在根据key去另一个对象中找对应的值b,再以a为key,b为数组元素组成新的对象输出。）
+         * 3，还没有想好如何操作的。
+         */
+        let { goodsSpecList,goodsSpecJSON } = this.state
+        let keys={}
+        let sku_list=[]
+        // 先将goodsSpecJSON中key的第一个字符改成小写
+        // 用Object.keys方法获取对象的key,value值，配上forEach循环实现
+        goodsSpecJSON = goodsSpecJSON.map((keyo)=> { //  Object.keys(keyo)返回的是数组[specA]      [specA][0]=specA
+            let key = Object.keys(keyo)[0];
+            let newkey = key.substring(0,1).toLowerCase() + key.substring(1)  // 前面部分截取第一个字符并且转化成小写 然后加上后面的组成新的字符串
+            let dic= {} // 定义一个对象dic
+            dic[newkey]=keyo[key] // 将原来的老key对应的值赋值给newKy
+            return dic  // 返回新的数组对象
+        })
+
+        // 生成 keys 
+        goodsSpecJSON.forEach((keyo)=>{     // 遍历转小写后的goodsSpecJSON,
+            // console.log(keyo) {specA: "颜色"} specB: specC:  specD:  ....
+            let key = Object.keys(keyo)[0] //  Object.keys(keyo)返回的是数组[specA]      [specA][0]=specA
+            let val = keyo[key] //  颜色
+            if(!keys.hasOwnProperty(val)){ // ?
+                keys[val] = [];
+            }
+            let hash = {}// 为什么要定义这个空对象
+            goodsSpecList.forEach((item, i)=> { // item 是遍历的goodsSpecList对象， i是什么呢？
+                if (hash[item[key]]===undefined){ // item[key]=specA hash[item[key]]===undefined 是成立的
+                    hash[item[key]]=true          // 这里赋值
+                    keys[val].push(item[key])  // keys={}在上面定义的对象. specA-颜色-红色。。。
+                }
+            })
+        })
+        console.log(keys)
+
+        // 生成sku_list 还是两个对象关联取值啊
+
+        // 第一步，遍历对象goodsSpecList
+        // 第二步，（第二层遍历）在循环中遍历goodsSpecJSON，
+        // 取第二层的键，去取第一层中的对应的值，然后拼接返回
+
+          
+        goodsSpecList.forEach((item)=> {
+            let dic={
+                attrs:''
+            }          
+            
+            goodsSpecJSON.forEach((keyo,j)=> {
+                let key = Object.keys(keyo)[0]  // 取出spaceA
+                dic.attrs += item[key] + (j === goodsSpecJSON.length-1 ? '' : '|') // 是因为颜色总共只有四个对吗，所以有goodsSpecJSON.length-1 
+                dic.price = item.goodsDetailPrice
+                dic.goodsDetailCount = item.goodsDetailCount
+                dic.goodsDetailId = item.goodsDetailId
+            })
+            sku_list.push(dic) //把对象push到数组到当中。
+
+        })
+    console.log(sku_list)
+
+
+    }
+
+
+    handleClick2 = ()=> {
+        let { goodsSpecList,goodsSpecJSON } = this.state  // 取出两个对象
+
+        let keys={} // 用来放 转化好的第一组数据
+        let sku_list=[] // 用来放，转化好的第二组数据
+
+        // 改变大小写，将原数组对象中key的大写改为小写。 先用map获取数组中每个对象元素，在用Object.keys(keyo)[0]获取对象元素中的key
+        // 在改为小写 ，用substring(0,1)截取第一个字符.使用toLowCase()改变为小写。再拼接后面的 +substring(1)
+        // 定义一个对象，将新key附上对应的值(将)，让后将结果返回
+        //1，先将 第一个对象中的数据，改变一下，取小写(用map并且要return) [{SpaceA:颜色},{SpaceA:颜色},{SpaceA:颜色}...]
+        goodsSpecJSON=goodsSpecJSON.map((keyo)=> { // 对象里面是对象，用map,返回新数组  是数组里的每个元素对象 keyo比如{SpaceA:颜色}。。。
+        // 取出key
+            let key=Object.keys(keyo)[0] // 比如 Object.keys(keyo) 返回的是键的数组 [SpaceA]  Object.keys(keyo)[0]是SpaceA
+            // 将首字母大写改为小写
+            let newkey=key.substring(0,1).toLowerCase()+key.substring(1)
+            // 组成新的对象
+            let dic={}
+            // let a=keyo.key    // js中对象的取值方式有两种 o.x 和o[x] 
+            //其实可以理解为 dic.a=o.x 给对象 dic赋值
+            dic[newkey]=keyo[key] // 为什么不用.来取值和赋值呢？如果x是变量，那么不能用.了，只能用中括号来
+            return dic
+        })
+        console.log(goodsSpecJSON)
+
+        // 组装keys={} ,关系是新对象中的key和对象二中的key相同的，那么把值取出来放在一起
+        // 遍历呀 外循环+内循环
+        goodsSpecJSON.forEach((item)=> { // item={spaceA:颜色}
+            let key=Object.keys(item)[0] // spaceA
+            let val=item[key] // 颜色
+            // 根据key去另一个对象里面取值
+            goodsSpecList.forEach((res)=>{ //{spaceA:黑色}
+            if(!keys.hasOwnProperty(val)){ // hasOwnProperty 查找自己的某个属性
+                keys[val]=[]    // keys[val] 颜色:[]
+            }
+                // 
+               let  hash={} 
+                if(hash[res[key]]===undefined){
+                    hash[res[key]]=true
+                    keys[val].push(res[key]) // 对象 keys={}  键keys[val]颜色  对应的值数组中push添加元素，颜色:[] 
+                }
+            })
+        })
+        console.log(keys)
+
+        // let sku_list=[] 
+        goodsSpecList.forEach((item)=> {
+            let dic={}
+            goodsSpecJSON.forEach((keyo,j)=> {
+                dic.attrs +=item[Object.keys(keyo)[0]]+(j===goodsSpecJSON.length-1?'':'|') // 拼成想要的样子
+                dic.discountPrice=item.discountPrice
+                dic.goodsDetailCount=item.goodsDetailCount
+                dic.goodsDetailId=item.goodsDetailId
+            })
+            sku_list.push(dic)
+        })
+        console.log(sku_list)
+
+    }
+
+
+    handleClick3=()=>{
+        let { goodsSpecList,goodsSpecJSON } = this.state  // 取出两个对象
+
+        let keys={} // 用来放 转化好的第一组数据
+        let sku_list=[] // 用来放，转化好的第二组数据
+        //处理数据，大小写
+        goodsSpecJSON=goodsSpecJSON.map((keyo)=>{
+            let key=Object.keys(keyo)[0]
+            let newkey=key.substring(0,1).toLowerCase()+key.substring(1)
+            let s={}
+            s[newkey]=keyo[key]
+            return s
+        })
+        console.log(goodsSpecJSON)
+
+        // keys
+        goodsSpecJSON.forEach((item)=> {
+            let key=Object.keys(item)[0]
+            let val=item[key]
+            if(!keys.hasOwnProperty(val)){
+                keys[val]=[]
+            }
+            goodsSpecList.forEach((res)=>{
+                let hash={}
+                if(hash[res[key]]===undefined){
+                    hash[res[key]]=true
+                    keys[val].push(res[key])
+                }
+            })
+            
+        })
+        console.log(keys)
+
+        // sku_list=[]
+        goodsSpecList.forEach((item)=>{
+            let dic={
+                attrs:''
+            }
+            goodsSpecJSON.forEach((keyo,j)=>{
+                let key=Object.keys(keyo)[0]
+                dic.attrs += item[key]+ (j===goodsSpecJSON.length-1?'':'|')
+                dic.discountPrice=item.discountPrice
+                dic.goodsDetailCount=item.goodsDetailCount
+                dic.goodsDetailId=item.goodsDetailId
+            })
+            sku_list.push(dic)
+        })
+        console.log(sku_list)
+
+    }
+    inputChange=(e)=>{
+        // 获取输入端的值
+        this.setState({
+            username:e.target.value
+        })
+    }
+
+
+    render(){
+        return(
+            <>
+                {/* 双向数据绑定 */}
+                <div className="APP">
+                   <h2>双向数据绑定</h2>
+                   {/* model改变影响View view改变反过来影响model */}
+                   <input value={this.state.username} onChange={this.inputChange}/>
+                   <button onClick={this.handleClick} />
+
+                   <button onClick={this.handleClick3} />
+                </div>
+            </>
+        )
+    }
+}
